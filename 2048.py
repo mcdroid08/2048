@@ -25,6 +25,7 @@ colors = {
 total_score = None
 
 class matrix:
+    '''class to maintain matrix type object for game'''
     def __init__(self, n):
         self.n = n
         self.matrix = []
@@ -58,6 +59,7 @@ class matrix:
         self.matrix[x1][y1] = 2
 
     def available_positions(self):
+        '''Gives us list of avaliable positions'''
         positions = []
         for i in range(self.n):
             for j in range(self.n):
@@ -93,9 +95,8 @@ def update(root, grid):
 
 
 def buclick(root, grid, bu):
-
-    global previous_state
-    previous_state = grid.matrix
+    
+    '''This function will launch on evey move and move the tiles accordingly and update everything'''
 
     if bu == 'l':
         l_move(grid)
@@ -120,17 +121,14 @@ def buclick(root, grid, bu):
         grid.matrix[pos[0]][pos[1]] = new
         update(root, grid)
 
-def previous(root, grid):
-    if previous_state:
-        grid.matrix = previous_state
-        update(root, grid)
-
 def reset_bu(root, grid):
+    '''reset the whole game'''
     grid.reset()
     update(root, grid)
     total_score.set(0)
 
 def l_move(grid):
+    '''Left move'''
     for row in grid.matrix:
         for i in range(1, grid.n):
             if isinstance(row[i], int):
@@ -144,6 +142,7 @@ def l_move(grid):
                         row[i] = ''
 
 def r_move(grid):
+    '''Right move'''
     for row in grid.matrix:
         for i in range(grid.n-2, -1, -1):
             if isinstance(row[i], int):
@@ -157,7 +156,7 @@ def r_move(grid):
                         row[i] = ''
 
 def u_move(grid):
-
+    '''Up move'''
     for j in range(grid.n):
         row = []
         for r in grid.matrix:
@@ -178,6 +177,7 @@ def u_move(grid):
             grid.matrix[i][j] = row[i]
 
 def d_move(grid):
+    '''Down move'''
     for j in range(grid.n):
         row = []
         for r in grid.matrix:
@@ -203,7 +203,7 @@ def gui(grid):
     :param grid: game grid object
     :return: none
     '''
-    global total_score
+    global total_score 
     root = Tk()
     root.title("2048 game")
 
@@ -211,7 +211,7 @@ def gui(grid):
         root.rowconfigure(i,weight=1) #for changing size label with window increase
         root.columnconfigure(i,weigh=1)
 
-    total_score = IntVar()
+    total_score = IntVar() 
     root.config(background='#bdc3c7')
     ###########################################
     #putting initial position of all labels
