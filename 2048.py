@@ -1,9 +1,7 @@
 from tkinter import Button, Frame, Label, Tk, messagebox, IntVar
 from random import choice, randint
-import numpy as np
 
 n = 4
-previous_state = False
 colors = {
     '':'#b2bec3',
     2:'#fdcb6e',
